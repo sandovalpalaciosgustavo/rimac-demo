@@ -1,3 +1,18 @@
 .text-center {
     text-align: center;
 }
+.d-flex {
+    display: flex;
+}
+
+.justify-content-around{
+    justify-content: space-around;
+}
+
+.pl-5{
+    padding-left: 50px;
+}
+
+.borde {
+    border: 1px solid black;
+}

@@ -173,6 +173,12 @@ $width-form: 352px;
   accent-color: #242424;
 }
 
+.error {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 4px;
+}
+
 @media (max-width: 768px) {
   .content {
     grid-template-areas: "title picture" "form form";

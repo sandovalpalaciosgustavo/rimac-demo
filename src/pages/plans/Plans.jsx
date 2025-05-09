@@ -42,8 +42,8 @@ export const Plans = () => {
     <div className="plans__main-container">
       <Header></Header>
       {/* <div>planes y coberturas</div> */}
-      <div>
-        <a href="" onClick={getBack}>
+      <div >
+        <a className="pl-5" href="" onClick={getBack}>
           <icon></icon> Volver
         </a>
       </div>
