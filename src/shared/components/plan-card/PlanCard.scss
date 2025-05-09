@@ -1,0 +1,10 @@
+.plan-card__container {
+  cursor: pointer;
+  border-radius: 24px;
+  padding: 16px 24px 40px;
+  display: block;
+  max-width: 150px;
+  span {
+    font-size: 12px;
+  }
+}
