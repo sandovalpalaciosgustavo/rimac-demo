@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Header } from "../../shared/header/Header";
 import { PlanCard } from "../../shared/components/plan-card/PlanCard";
+import { SelectionCard } from "../../shared/components/selection-card/SelectionCard";
 import { useGetPlansQuery } from "../../features/api/apiSlice";
 import PlanParaMi from "../../assets/plan__para-mi.png";
 import PlanParaAlguienMas from "../../assets/plan__para-alguien-mas.png";
@@ -23,56 +25,56 @@ const customer = [
   },
 ];
 export const Plans = () => {
-  const {
-    data:  plans,
-    isLoading,
-    error,
-  } = useGetPlansQuery();
+  const { data: plans, isLoading, error } = useGetPlansQuery();
   const [showPlans, setShowPlans] = useState(false);
 
-/*   useEffect(() => {
-    if (!isLoading && plans) {
-      console.log("Planes cargados (tipo):", typeof plans);
-      console.log("Planes cargados (contenido):", JSON.stringify(plans, null, 2));
-    }
-    if (error) {
-      console.error("Error al cargar los planes:", error);
-    }
-  }, [isLoading, plans, error]);; */
+  useEffect(() => {
+    console.log(plans);
+  }, [showPlans]);
+
+  const navigate = useNavigate();
+
+  const getBack = () => {
+    navigate("/");
+  };
 
   return (
     <div className="plans__main-container">
       <Header></Header>
-      <div>planes y coberturas</div>
-      <div>Volver</div>
+      {/* <div>planes y coberturas</div> */}
       <div>
-        <h2>Rocío ¿Para quién deseas cotizar?</h2>
+        <a href="" onClick={getBack}>
+          <icon></icon> Volver
+        </a>
       </div>
-      <div>
-        {customer.map((plan) => (
-          <div onClick={() => setShowPlans(true)}>
+      <h2 className="text-center">Rocío ¿Para quién deseas cotizar?</h2>
+      <span className="text-center">Selecciona la opcion que se ajusta a tus necesdades</span>
+
+      <div className="plans__customer">
+        {customer.map((plan, index) => (
+          <div key={index} onClick={() => setShowPlans(true)}>
             <PlanCard
-              key={plan.id}
-              title={plan.title}
-              description={plan.description}
-              src={plan.src}
+              key={plan?.id}
+              title={plan?.title}
+              description={plan?.description}
+              src={plan?.src}
             />
           </div>
         ))}
       </div>
-       {showPlans && (
-        <div>
-          {plans && plans.list?.map((plan) => (
-            <PlanCard
-              key={plan.id}
-              title={plan.title}
-              description={plan.description}
-              src={plan.src}
-            />
-          ))}
+      {showPlans && (
+        <div className="plans__plans">
+          {plans &&
+            plans.list?.map((plan) => (
+              <SelectionCard
+                name={plan?.name}
+                price={plan?.price}
+                description={plan?.description}
+                age={plan?.age}
+              />
+            ))}
         </div>
-      )} 
-      <h2>holaaaa</h2>
+      )}
     </div>
   );
 };

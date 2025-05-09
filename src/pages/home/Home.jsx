@@ -21,7 +21,7 @@ export const Home = () => {
       <div className="content">
         <div className="picture">
           <div className="container">
-            {/* <img src={imagen_portada} alt="Familia" className="family-image" /> */}
+             <img src={imagen_portada} alt="Familia" className="family-image" />
           </div>
         </div>
         <div className="title">
