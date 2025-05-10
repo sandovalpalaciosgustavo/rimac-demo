@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../../shared/header/Header";
 import { PlanCard } from "../../shared/components/plan-card/PlanCard";
 import { SelectionCard } from "../../shared/components/selection-card/SelectionCard";
-import { useGetPlansQuery } from "../../features/api/apiSlice";
+import { useGetPlansQuery, useGetUserQuery } from "../../features/api/apiSlice";
 import PlanParaMi from "../../assets/plan__para-mi.png";
 import PlanParaAlguienMas from "../../assets/plan__para-alguien-mas.png";
 import "./Plans.scss";
@@ -14,7 +14,7 @@ const customer = [
     title: "Para mí",
     description:
       "Cotiza tu seguro de salud y agrega familiares si así lo deseas",
-    src: PlanParaMi,    
+    src: PlanParaMi,
   },
   {
     id: 2,
@@ -25,13 +25,10 @@ const customer = [
   },
 ];
 export const Plans = () => {
-  const { data: plans, isLoading, error } = useGetPlansQuery();
+  const { data: user } = useGetUserQuery();
+  const { data: plans } = useGetPlansQuery();
   const [showPlans, setShowPlans] = useState(false);
-  const [typeOfCustomer, setTypeOfCustomer] = useState("")
-
-  useEffect(() => {
-    console.log(plans);
-  }, [showPlans]);
+  const [typeOfCustomer, setTypeOfCustomer] = useState("");
 
   const navigate = useNavigate();
 
@@ -53,14 +50,14 @@ export const Plans = () => {
           <icon></icon> Volver
         </a>
       </div>
-      <h2 className="text-center">Rocío ¿Para quién deseas cotizar?</h2>
+      <h2 className="text-center">{user?.name} ¿Para quién deseas cotizar?</h2>
       <span className="text-center">
         Selecciona la opcion que se ajusta a tus necesdades
       </span>
 
       <div className="plans__customer">
         {customer.map((plan) => (
-          <div key={plan.id} onClick={()=>handlerPlanCard(plan.id)}>
+          <div key={plan.id} onClick={() => handlerPlanCard(plan.id)}>
             <PlanCard
               id={plan?.id}
               title={plan?.title}
@@ -71,18 +68,21 @@ export const Plans = () => {
           </div>
         ))}
       </div>
+
       {showPlans && (
-        <div className="plans__plans">
-          {plans &&
-            plans.list?.map((plan) => (
-              <SelectionCard
-                key={plan?.name}
-                name={plan?.name}
-                price={plan?.price}
-                description={plan?.description}
-                age={plan?.age}
-              />
-            ))}
+        <div>
+          <div className="plans__plans" >
+            {plans &&
+              plans.list?.map((plan) => (
+                <SelectionCard
+                  key={plan?.name}
+                  name={plan?.name}
+                  price={plan?.price}
+                  description={plan?.description}
+                  age={plan?.age}
+                />
+              ))}
+          </div>
         </div>
       )}
     </div>
