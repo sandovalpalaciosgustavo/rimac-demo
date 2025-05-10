@@ -14,7 +14,7 @@ const customer = [
     title: "Para mí",
     description:
       "Cotiza tu seguro de salud y agrega familiares si así lo deseas",
-    src: PlanParaMi,
+    src: PlanParaMi,    
   },
   {
     id: 2,
@@ -27,6 +27,7 @@ const customer = [
 export const Plans = () => {
   const { data: plans, isLoading, error } = useGetPlansQuery();
   const [showPlans, setShowPlans] = useState(false);
+  const [typeOfCustomer, setTypeOfCustomer] = useState("")
 
   useEffect(() => {
     console.log(plans);
@@ -38,26 +39,34 @@ export const Plans = () => {
     navigate("/");
   };
 
+  const handlerPlanCard = (id) => {
+    setTypeOfCustomer(id);
+    setShowPlans(true);
+  };
+
   return (
     <div className="plans__main-container">
       <Header></Header>
       {/* <div>planes y coberturas</div> */}
-      <div >
+      <div>
         <a className="pl-5" href="" onClick={getBack}>
           <icon></icon> Volver
         </a>
       </div>
       <h2 className="text-center">Rocío ¿Para quién deseas cotizar?</h2>
-      <span className="text-center">Selecciona la opcion que se ajusta a tus necesdades</span>
+      <span className="text-center">
+        Selecciona la opcion que se ajusta a tus necesdades
+      </span>
 
       <div className="plans__customer">
-        {customer.map((plan, index) => (
-          <div key={index} onClick={() => setShowPlans(true)}>
+        {customer.map((plan) => (
+          <div key={plan.id} onClick={()=>handlerPlanCard(plan.id)}>
             <PlanCard
-              key={plan?.id}
+              id={plan?.id}
               title={plan?.title}
               description={plan?.description}
               src={plan?.src}
+              typeOfCustomer={typeOfCustomer}
             />
           </div>
         ))}
@@ -67,6 +76,7 @@ export const Plans = () => {
           {plans &&
             plans.list?.map((plan) => (
               <SelectionCard
+                key={plan?.name}
                 name={plan?.name}
                 price={plan?.price}
                 description={plan?.description}

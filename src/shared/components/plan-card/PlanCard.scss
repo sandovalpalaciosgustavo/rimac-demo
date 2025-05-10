@@ -4,14 +4,31 @@
   padding: 16px 24px 40px;
   display: block;
   width: 150px;
+
   span {
     font-size: 12px;
   }
+
+  img {
+    width: 48px;
+  }
 }
 
+.plan-card__check-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid gray;
+  margin-left: auto;
+  cursor: pointer;
+  &.checked {
+    background-color: green;
+    border-color: green;
+  }
+}
 
 @media (max-width: 768px) {
   .plan-card__container {
-    width: 300px;  
+    width: 300px;
   }
 }

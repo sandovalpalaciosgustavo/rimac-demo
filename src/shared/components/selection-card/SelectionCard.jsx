@@ -37,8 +37,8 @@ export const SelectionCard = ({
           </div>
           <hr />
           <ul className="selection-card__description">
-            {description.map((item) => (
-              <li>{item}</li>
+            {description.map((item,index) => (
+              <li key={index}>{item}</li>
             ))}
           </ul>
           <button className="selection-card__button">Seleccionar Plan</button>

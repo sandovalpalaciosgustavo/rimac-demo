@@ -7,10 +7,10 @@ export const apiSlice = createApi({
     getPlans: builder.query({
       query: () => '/plans.json',
     }),
-    /* getPostById: builder.query({
-      query: (id) => `/posts/${id}`,
-    }), */
+    getUser: builder.query({
+      query: (id) => `/user.json`,
+    }), 
   }),
 });
 
-export const { useGetPlansQuery } = apiSlice;
+export const { useGetPlansQuery, useGetUserQuery } = apiSlice;
