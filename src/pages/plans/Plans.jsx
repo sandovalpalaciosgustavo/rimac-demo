@@ -47,7 +47,7 @@ export const Plans = () => {
       {/* <div>planes y coberturas</div> */}
       <div>
         <a className="pl-5" href="" onClick={getBack}>
-          <icon></icon> Volver
+          {/* <icon></icon> */} Volver
         </a>
       </div>
       <h2 className="text-center">{user?.name} ¿Para quién deseas cotizar?</h2>

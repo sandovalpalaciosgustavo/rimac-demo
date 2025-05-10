@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Card } from "../card/Card";
 import "./SelectionCard.scss";
 import PlanCasaImg from "../../../assets/plan__casa.png";
@@ -9,9 +10,16 @@ export const SelectionCard = ({
   description = [],
   age = "",
 }) => {
+  const navigate = useNavigate();
+
   const isClinic = () => {
     return name.toLowerCase().includes("clínica");
   };
+
+  const getNext = () => {
+    navigate("/resumen");
+  };
+
   return (
     <div>
       <Card>
@@ -37,11 +45,13 @@ export const SelectionCard = ({
           </div>
           <hr />
           <ul className="selection-card__description">
-            {description.map((item,index) => (
+            {description.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
           </ul>
-          <button className="selection-card__button">Seleccionar Plan</button>
+          <button className="selection-card__button" onClick={getNext}>
+            Seleccionar Plan
+          </button>
         </div>
       </Card>
     </div>
